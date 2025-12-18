@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="威软快搜 - 一站式超级搜索工具，支持网页、网盘、论坛等多源搜索">
+    <meta name="keywords" content="搜索,网盘搜索,论坛搜索,快速搜索,威软快搜">
+    <title>威软快搜 - 超级搜索工具</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🚀</span>
+                <h1>威软快搜</h1>
+                <span class="logo-subtitle">超级搜索工具</span>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" title="切换主题">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 主搜索区域 -->
+        <main class="main-content">
+            <div class="search-section">
+                <div class="search-box">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            class="search-input"
+                            placeholder="输入关键词，开始搜索..."
+                            autocomplete="off"
+                        >
+                        <button class="clear-btn" id="clearBtn" title="清除">✕</button>
+                    </div>
+                    <button class="search-btn" id="searchBtn">搜 索</button>
+                </div>
+
+                <!-- 搜索建议下拉框 -->
+                <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                        <span>搜索历史</span>
+                        <button class="clear-history" id="clearHistory">清空</button>
+                    </div>
+                    <ul class="suggestions-list" id="suggestionsList"></ul>
+                </div>
+
+                <!-- 搜索类型选择 -->
+                <div class="search-types">
+                    <button class="type-btn active" data-type="all">
+                        <span class="type-icon">🌐</span>
+                        <span>全部</span>
+                    </button>
+                    <button class="type-btn" data-type="web">
+                        <span class="type-icon">🔗</span>
+                        <span>网页</span>
+                    </button>
+                    <button class="type-btn" data-type="disk">
+                        <span class="type-icon">💾</span>
+                        <span>网盘</span>
+                    </button>
+                    <button class="type-btn" data-type="forum">
+                        <span class="type-icon">💬</span>
+                        <span>论坛</span>
+                    </button>
+                    <button class="type-btn" data-type="video">
+                        <span class="type-icon">🎬</span>
+                        <span>视频</span>
+                    </button>
+                    <button class="type-btn" data-type="image">
+                        <span class="type-icon">🖼️</span>
+                        <span>图片</span>
+                    </button>
+                    <button class="type-btn" data-type="doc">
+                        <span class="type-icon">📄</span>
+                        <span>文档</span>
+                    </button>
+                    <button class="type-btn" data-type="soft">
+                        <span class="type-icon">💿</span>
+                        <span>软件</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 热搜榜单区域 -->
+            <div class="hot-search-section">
+                <div class="section-header">
+                    <h2><span class="fire-icon">🔥</span> 实时热搜</h2>
+                    <button class="refresh-btn" id="refreshHot" title="刷新">
+                        <span>🔄</span>
+                        <span>换一批</span>
+                    </button>
+                </div>
+                <div class="hot-search-tabs">
+                    <button class="hot-tab active" data-source="weibo">微博热搜</button>
+                    <button class="hot-tab" data-source="baidu">百度热搜</button>
+                    <button class="hot-tab" data-source="zhihu">知乎热榜</button>
+                    <button class="hot-tab" data-source="douyin">抖音热点</button>
+                </div>
+                <div class="hot-search-list" id="hotSearchList">
+                    <!-- 热搜列表将通过JS动态生成 -->
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <span>加载中...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快捷工具区域 -->
+            <div class="quick-tools-section">
+                <div class="section-header">
+                    <h2><span class="tool-icon">🛠️</span> 快捷工具</h2>
+                </div>
+                <div class="tools-grid">
+                    <a href="#" class="tool-card" data-tool="translate">
+                        <span class="tool-emoji">🌍</span>
+                        <span class="tool-name">在线翻译</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="calculator">
+                        <span class="tool-emoji">🧮</span>
+                        <span class="tool-name">计算器</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="weather">
+                        <span class="tool-emoji">🌤️</span>
+                        <span class="tool-name">天气查询</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="ip">
+                        <span class="tool-emoji">📍</span>
+                        <span class="tool-name">IP查询</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="express">
+                        <span class="tool-emoji">📦</span>
+                        <span class="tool-name">快递查询</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="qrcode">
+                        <span class="tool-emoji">📱</span>
+                        <span class="tool-name">二维码生成</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="color">
+                        <span class="tool-emoji">🎨</span>
+                        <span class="tool-name">颜色转换</span>
+                    </a>
+                    <a href="#" class="tool-card" data-tool="time">
+                        <span class="tool-emoji">⏰</span>
+                        <span class="tool-name">时间戳转换</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 搜索引擎导航 -->
+            <div class="engines-section">
+                <div class="section-header">
+                    <h2><span class="nav-icon">🧭</span> 搜索引擎</h2>
+                </div>
+                <div class="engines-grid">
+                    <div class="engine-category">
+                        <h3>综合搜索</h3>
+                        <div class="engine-list">
+                            <a href="#" class="engine-item" data-engine="baidu">
+                                <span class="engine-logo">🅱️</span>
+                                <span>百度</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="bing">
+                                <span class="engine-logo">Ⓜ️</span>
+                                <span>必应</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="google">
+                                <span class="engine-logo">🔍</span>
+                                <span>谷歌</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="sogou">
+                                <span class="engine-logo">🐕</span>
+                                <span>搜狗</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="360">
+                                <span class="engine-logo">🔵</span>
+                                <span>360</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="engine-category">
+                        <h3>网盘搜索</h3>
+                        <div class="engine-list">
+                            <a href="#" class="engine-item" data-engine="pansou">
+                                <span class="engine-logo">☁️</span>
+                                <span>盘搜搜</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="dalipan">
+                                <span class="engine-logo">💿</span>
+                                <span>大力盘</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="56wangpan">
+                                <span class="engine-logo">📁</span>
+                                <span>56网盘</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="yiso">
+                                <span class="engine-logo">🔎</span>
+                                <span>易搜</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="engine-category">
+                        <h3>学术搜索</h3>
+                        <div class="engine-list">
+                            <a href="#" class="engine-item" data-engine="scholar">
+                                <span class="engine-logo">🎓</span>
+                                <span>谷歌学术</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="cnki">
+                                <span class="engine-logo">📚</span>
+                                <span>知网</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="wanfang">
+                                <span class="engine-logo">📖</span>
+                                <span>万方</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="engine-category">
+                        <h3>社区论坛</h3>
+                        <div class="engine-list">
+                            <a href="#" class="engine-item" data-engine="zhihu">
+                                <span class="engine-logo">💡</span>
+                                <span>知乎</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="tieba">
+                                <span class="engine-logo">📝</span>
+                                <span>贴吧</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="weibo">
+                                <span class="engine-logo">🌐</span>
+                                <span>微博</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="douban">
+                                <span class="engine-logo">🌿</span>
+                                <span>豆瓣</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部区域 -->
+        <footer class="footer">
+            <p>© 2024 威软快搜 - 您的智能搜索助手</p>
+            <p class="footer-links">
+                <a href="#">关于我们</a>
+                <span class="divider">|</span>
+                <a href="#">使用帮助</a>
+                <span class="divider">|</span>
+                <a href="#">隐私政策</a>
+                <span class="divider">|</span>
+                <a href="#">意见反馈</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- 工具模态框 -->
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">工具</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop" title="返回顶部">⬆️</button>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/config.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/hotSearch.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
