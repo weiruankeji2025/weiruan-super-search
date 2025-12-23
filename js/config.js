@@ -11,186 +11,258 @@ const CONFIG = {
     // 搜索引擎配置
     searchEngines: {
         // 综合搜索
-        baidu: {
-            name: '百度',
-            url: 'https://www.baidu.com/s?wd=',
-            icon: '🅱️',
-            category: 'general'
-        },
-        bing: {
-            name: '必应',
-            url: 'https://www.bing.com/search?q=',
-            icon: 'Ⓜ️',
-            category: 'general'
-        },
         google: {
-            name: '谷歌',
+            name: 'Google',
             url: 'https://www.google.com/search?q=',
             icon: '🔍',
             category: 'general'
         },
-        sogou: {
-            name: '搜狗',
-            url: 'https://www.sogou.com/web?query=',
-            icon: '🐕',
+        bing: {
+            name: 'Bing',
+            url: 'https://www.bing.com/search?q=',
+            icon: 'Ⓜ️',
             category: 'general'
         },
-        '360': {
-            name: '360搜索',
-            url: 'https://www.so.com/s?q=',
-            icon: '🔵',
+        duckduckgo: {
+            name: 'DuckDuckGo',
+            url: 'https://duckduckgo.com/?q=',
+            icon: '🦆',
+            category: 'general'
+        },
+        yahoo: {
+            name: 'Yahoo',
+            url: 'https://search.yahoo.com/search?p=',
+            icon: '🟣',
+            category: 'general'
+        },
+        ecosia: {
+            name: 'Ecosia',
+            url: 'https://www.ecosia.org/search?q=',
+            icon: '🌳',
             category: 'general'
         },
 
-        // 网盘搜索
-        pansou: {
-            name: '盘搜搜',
-            url: 'https://www.pansoso.org/search?q=',
-            icon: '☁️',
-            category: 'disk'
-        },
-        dalipan: {
-            name: '大力盘',
-            url: 'https://www.dalipan.com/search?keyword=',
-            icon: '💿',
-            category: 'disk'
-        },
-        '56wangpan': {
-            name: '56网盘',
-            url: 'https://www.56wangpan.com/search?q=',
+        // 云盘/文件搜索
+        googleDrive: {
+            name: 'Google Drive',
+            url: 'https://drive.google.com/drive/search?q=',
             icon: '📁',
             category: 'disk'
         },
-        yiso: {
-            name: '易搜',
-            url: 'https://yiso.fun/info?searchKey=',
-            icon: '🔎',
+        dropbox: {
+            name: 'Dropbox',
+            url: 'https://www.dropbox.com/search/personal?query=',
+            icon: '📦',
+            category: 'disk'
+        },
+        onedrive: {
+            name: 'OneDrive',
+            url: 'https://onedrive.live.com/?q=',
+            icon: '☁️',
+            category: 'disk'
+        },
+        mediafire: {
+            name: 'MediaFire',
+            url: 'https://www.mediafire.com/search?q=',
+            icon: '🔥',
             category: 'disk'
         },
 
         // 学术搜索
         scholar: {
-            name: '谷歌学术',
+            name: 'Google Scholar',
             url: 'https://scholar.google.com/scholar?q=',
             icon: '🎓',
             category: 'academic'
         },
-        cnki: {
-            name: '知网',
-            url: 'https://kns.cnki.net/kns8/defaultresult/index?kw=',
-            icon: '📚',
+        pubmed: {
+            name: 'PubMed',
+            url: 'https://pubmed.ncbi.nlm.nih.gov/?term=',
+            icon: '🔬',
             category: 'academic'
         },
-        wanfang: {
-            name: '万方',
-            url: 'https://s.wanfangdata.com.cn/paper?q=',
-            icon: '📖',
+        arxiv: {
+            name: 'arXiv',
+            url: 'https://arxiv.org/search/?query=',
+            icon: '📐',
+            category: 'academic'
+        },
+        semanticScholar: {
+            name: 'Semantic Scholar',
+            url: 'https://www.semanticscholar.org/search?q=',
+            icon: '🧠',
+            category: 'academic'
+        },
+        jstor: {
+            name: 'JSTOR',
+            url: 'https://www.jstor.org/action/doBasicSearch?Query=',
+            icon: '📚',
             category: 'academic'
         },
 
         // 社区论坛
-        zhihu: {
-            name: '知乎',
-            url: 'https://www.zhihu.com/search?type=content&q=',
-            icon: '💡',
+        reddit: {
+            name: 'Reddit',
+            url: 'https://www.reddit.com/search/?q=',
+            icon: '🤖',
             category: 'forum'
         },
-        tieba: {
-            name: '百度贴吧',
-            url: 'https://tieba.baidu.com/f?kw=',
-            icon: '📝',
+        quora: {
+            name: 'Quora',
+            url: 'https://www.quora.com/search?q=',
+            icon: '❓',
             category: 'forum'
         },
-        weibo: {
-            name: '微博',
-            url: 'https://s.weibo.com/weibo?q=',
-            icon: '🌐',
+        stackoverflow: {
+            name: 'Stack Overflow',
+            url: 'https://stackoverflow.com/search?q=',
+            icon: '📊',
             category: 'forum'
         },
-        douban: {
-            name: '豆瓣',
-            url: 'https://www.douban.com/search?q=',
-            icon: '🌿',
+        twitter: {
+            name: 'X (Twitter)',
+            url: 'https://twitter.com/search?q=',
+            icon: '🐦',
+            category: 'forum'
+        },
+        hackernews: {
+            name: 'Hacker News',
+            url: 'https://hn.algolia.com/?q=',
+            icon: '🔶',
             category: 'forum'
         },
 
         // 视频搜索
-        bilibili: {
-            name: 'B站',
-            url: 'https://search.bilibili.com/all?keyword=',
-            icon: '📺',
+        youtube: {
+            name: 'YouTube',
+            url: 'https://www.youtube.com/results?search_query=',
+            icon: '▶️',
             category: 'video'
         },
-        youku: {
-            name: '优酷',
-            url: 'https://so.youku.com/search_video/q_',
+        vimeo: {
+            name: 'Vimeo',
+            url: 'https://vimeo.com/search?q=',
             icon: '🎬',
             category: 'video'
         },
-        iqiyi: {
-            name: '爱奇艺',
-            url: 'https://so.iqiyi.com/so/q_',
-            icon: '🎥',
+        dailymotion: {
+            name: 'Dailymotion',
+            url: 'https://www.dailymotion.com/search/',
+            icon: '📹',
+            category: 'video'
+        },
+        twitch: {
+            name: 'Twitch',
+            url: 'https://www.twitch.tv/search?term=',
+            icon: '🎮',
             category: 'video'
         },
 
         // 图片搜索
-        baiduImg: {
-            name: '百度图片',
-            url: 'https://image.baidu.com/search/index?tn=baiduimage&word=',
+        googleImg: {
+            name: 'Google Images',
+            url: 'https://www.google.com/search?tbm=isch&q=',
             icon: '🖼️',
             category: 'image'
         },
-        googleImg: {
-            name: '谷歌图片',
-            url: 'https://www.google.com/search?tbm=isch&q=',
+        unsplash: {
+            name: 'Unsplash',
+            url: 'https://unsplash.com/s/photos/',
+            icon: '📷',
+            category: 'image'
+        },
+        pexels: {
+            name: 'Pexels',
+            url: 'https://www.pexels.com/search/',
             icon: '🏞️',
+            category: 'image'
+        },
+        flickr: {
+            name: 'Flickr',
+            url: 'https://www.flickr.com/search/?text=',
+            icon: '📸',
+            category: 'image'
+        },
+        pinterest: {
+            name: 'Pinterest',
+            url: 'https://www.pinterest.com/search/pins/?q=',
+            icon: '📌',
             category: 'image'
         },
 
         // 文档搜索
-        baiduDoc: {
-            name: '百度文库',
-            url: 'https://wenku.baidu.com/search?word=',
+        scribd: {
+            name: 'Scribd',
+            url: 'https://www.scribd.com/search?query=',
             icon: '📄',
             category: 'doc'
         },
-        docin: {
-            name: '豆丁',
-            url: 'https://www.docin.com/search.do?searchcat=2&searchType_banner=p&nkey=',
-            icon: '📃',
+        slideshare: {
+            name: 'SlideShare',
+            url: 'https://www.slideshare.net/search/slideshow?q=',
+            icon: '📊',
+            category: 'doc'
+        },
+        academia: {
+            name: 'Academia.edu',
+            url: 'https://www.academia.edu/search?q=',
+            icon: '🎓',
+            category: 'doc'
+        },
+        issuu: {
+            name: 'Issuu',
+            url: 'https://issuu.com/search?q=',
+            icon: '📖',
             category: 'doc'
         },
 
-        // 软件搜索
+        // 软件/代码搜索
         github: {
             name: 'GitHub',
             url: 'https://github.com/search?q=',
             icon: '🐙',
             category: 'soft'
         },
-        gitee: {
-            name: 'Gitee',
-            url: 'https://search.gitee.com/?type=repository&q=',
-            icon: '🔴',
+        gitlab: {
+            name: 'GitLab',
+            url: 'https://gitlab.com/search?search=',
+            icon: '🦊',
+            category: 'soft'
+        },
+        sourceforge: {
+            name: 'SourceForge',
+            url: 'https://sourceforge.net/directory/?q=',
+            icon: '💾',
+            category: 'soft'
+        },
+        npm: {
+            name: 'npm',
+            url: 'https://www.npmjs.com/search?q=',
+            icon: '📦',
+            category: 'soft'
+        },
+        pypi: {
+            name: 'PyPI',
+            url: 'https://pypi.org/search/?q=',
+            icon: '🐍',
             category: 'soft'
         }
     },
 
     // 搜索类型映射
     searchTypes: {
-        all: ['baidu', 'bing', 'google'],
-        web: ['baidu', 'bing', 'google', 'sogou', '360'],
-        disk: ['pansou', 'dalipan', '56wangpan', 'yiso'],
-        forum: ['zhihu', 'tieba', 'weibo', 'douban'],
-        video: ['bilibili', 'youku', 'iqiyi'],
-        image: ['baiduImg', 'googleImg'],
-        doc: ['baiduDoc', 'docin', 'cnki'],
-        soft: ['github', 'gitee']
+        all: ['google', 'bing', 'duckduckgo'],
+        web: ['google', 'bing', 'duckduckgo', 'yahoo', 'ecosia'],
+        disk: ['googleDrive', 'dropbox', 'onedrive', 'mediafire'],
+        forum: ['reddit', 'quora', 'stackoverflow', 'twitter', 'hackernews'],
+        video: ['youtube', 'vimeo', 'dailymotion', 'twitch'],
+        image: ['googleImg', 'unsplash', 'pexels', 'flickr', 'pinterest'],
+        doc: ['scribd', 'slideshare', 'academia', 'scholar'],
+        soft: ['github', 'gitlab', 'sourceforge', 'npm', 'pypi']
     },
 
     // 默认搜索引擎
-    defaultEngine: 'baidu',
+    defaultEngine: 'google',
 
     // 本地存储键名
     storageKeys: {

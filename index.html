@@ -99,10 +99,10 @@
                     </button>
                 </div>
                 <div class="hot-search-tabs">
-                    <button class="hot-tab active" data-source="weibo">微博热搜</button>
-                    <button class="hot-tab" data-source="baidu">百度热搜</button>
-                    <button class="hot-tab" data-source="zhihu">知乎热榜</button>
-                    <button class="hot-tab" data-source="douyin">抖音热点</button>
+                    <button class="hot-tab active" data-source="google">Google Trends</button>
+                    <button class="hot-tab" data-source="twitter">X Trending</button>
+                    <button class="hot-tab" data-source="reddit">Reddit Hot</button>
+                    <button class="hot-tab" data-source="hackernews">Hacker News</button>
                 </div>
                 <div class="hot-search-list" id="hotSearchList">
                     <!-- 热搜列表将通过JS动态生成 -->
@@ -163,46 +163,46 @@
                     <div class="engine-category">
                         <h3>综合搜索</h3>
                         <div class="engine-list">
-                            <a href="#" class="engine-item" data-engine="baidu">
-                                <span class="engine-logo">🅱️</span>
-                                <span>百度</span>
+                            <a href="#" class="engine-item" data-engine="google">
+                                <span class="engine-logo">🔍</span>
+                                <span>Google</span>
                             </a>
                             <a href="#" class="engine-item" data-engine="bing">
                                 <span class="engine-logo">Ⓜ️</span>
-                                <span>必应</span>
+                                <span>Bing</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="google">
-                                <span class="engine-logo">🔍</span>
-                                <span>谷歌</span>
+                            <a href="#" class="engine-item" data-engine="duckduckgo">
+                                <span class="engine-logo">🦆</span>
+                                <span>DuckDuckGo</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="sogou">
-                                <span class="engine-logo">🐕</span>
-                                <span>搜狗</span>
+                            <a href="#" class="engine-item" data-engine="yahoo">
+                                <span class="engine-logo">🟣</span>
+                                <span>Yahoo</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="360">
-                                <span class="engine-logo">🔵</span>
-                                <span>360</span>
+                            <a href="#" class="engine-item" data-engine="ecosia">
+                                <span class="engine-logo">🌳</span>
+                                <span>Ecosia</span>
                             </a>
                         </div>
                     </div>
                     <div class="engine-category">
-                        <h3>网盘搜索</h3>
+                        <h3>云盘存储</h3>
                         <div class="engine-list">
-                            <a href="#" class="engine-item" data-engine="pansou">
-                                <span class="engine-logo">☁️</span>
-                                <span>盘搜搜</span>
-                            </a>
-                            <a href="#" class="engine-item" data-engine="dalipan">
-                                <span class="engine-logo">💿</span>
-                                <span>大力盘</span>
-                            </a>
-                            <a href="#" class="engine-item" data-engine="56wangpan">
+                            <a href="#" class="engine-item" data-engine="googleDrive">
                                 <span class="engine-logo">📁</span>
-                                <span>56网盘</span>
+                                <span>Google Drive</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="yiso">
-                                <span class="engine-logo">🔎</span>
-                                <span>易搜</span>
+                            <a href="#" class="engine-item" data-engine="dropbox">
+                                <span class="engine-logo">📦</span>
+                                <span>Dropbox</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="onedrive">
+                                <span class="engine-logo">☁️</span>
+                                <span>OneDrive</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="mediafire">
+                                <span class="engine-logo">🔥</span>
+                                <span>MediaFire</span>
                             </a>
                         </div>
                     </div>
@@ -211,36 +211,40 @@
                         <div class="engine-list">
                             <a href="#" class="engine-item" data-engine="scholar">
                                 <span class="engine-logo">🎓</span>
-                                <span>谷歌学术</span>
+                                <span>Google Scholar</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="cnki">
+                            <a href="#" class="engine-item" data-engine="pubmed">
+                                <span class="engine-logo">🔬</span>
+                                <span>PubMed</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="arxiv">
+                                <span class="engine-logo">📐</span>
+                                <span>arXiv</span>
+                            </a>
+                            <a href="#" class="engine-item" data-engine="jstor">
                                 <span class="engine-logo">📚</span>
-                                <span>知网</span>
-                            </a>
-                            <a href="#" class="engine-item" data-engine="wanfang">
-                                <span class="engine-logo">📖</span>
-                                <span>万方</span>
+                                <span>JSTOR</span>
                             </a>
                         </div>
                     </div>
                     <div class="engine-category">
                         <h3>社区论坛</h3>
                         <div class="engine-list">
-                            <a href="#" class="engine-item" data-engine="zhihu">
-                                <span class="engine-logo">💡</span>
-                                <span>知乎</span>
+                            <a href="#" class="engine-item" data-engine="reddit">
+                                <span class="engine-logo">🤖</span>
+                                <span>Reddit</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="tieba">
-                                <span class="engine-logo">📝</span>
-                                <span>贴吧</span>
+                            <a href="#" class="engine-item" data-engine="stackoverflow">
+                                <span class="engine-logo">📊</span>
+                                <span>Stack Overflow</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="weibo">
-                                <span class="engine-logo">🌐</span>
-                                <span>微博</span>
+                            <a href="#" class="engine-item" data-engine="quora">
+                                <span class="engine-logo">❓</span>
+                                <span>Quora</span>
                             </a>
-                            <a href="#" class="engine-item" data-engine="douban">
-                                <span class="engine-logo">🌿</span>
-                                <span>豆瓣</span>
+                            <a href="#" class="engine-item" data-engine="twitter">
+                                <span class="engine-logo">🐦</span>
+                                <span>X (Twitter)</span>
                             </a>
                         </div>
                     </div>
