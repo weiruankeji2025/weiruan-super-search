@@ -5,60 +5,60 @@
 
 const HotSearchModule = {
     // 当前热搜源
-    currentSource: 'weibo',
+    currentSource: 'google',
 
     // 当前热搜数据
     currentData: [],
 
     // 模拟热搜数据（实际项目中应从API获取）
     mockData: {
-        weibo: [
-            { title: '2024年度十大热搜', heat: '9999万', tag: '热' },
-            { title: '春节档电影票房破纪录', heat: '8888万', tag: '爆' },
-            { title: 'AI技术最新突破', heat: '7777万', tag: '新' },
-            { title: '国产手机销量排行', heat: '6666万', tag: '' },
-            { title: '考研成绩公布时间', heat: '5555万', tag: '' },
-            { title: '新能源汽车补贴政策', heat: '4444万', tag: '' },
-            { title: '热门综艺节目更新', heat: '3333万', tag: '' },
-            { title: '国际油价最新动态', heat: '2222万', tag: '' },
-            { title: '健康养生小妙招', heat: '1111万', tag: '' },
-            { title: '明星最新动态', heat: '999万', tag: '' }
+        google: [
+            { title: 'ChatGPT new features 2024', heat: '5M+ searches', tag: 'Hot' },
+            { title: 'AI image generation tools', heat: '2M+ searches', tag: 'Trending' },
+            { title: 'Electric vehicle market trends', heat: '1.5M+ searches', tag: '' },
+            { title: 'Climate change solutions', heat: '1.2M+ searches', tag: '' },
+            { title: 'Remote work best practices', heat: '980K searches', tag: '' },
+            { title: 'Cryptocurrency price today', heat: '850K searches', tag: '' },
+            { title: 'SpaceX launch schedule', heat: '720K searches', tag: '' },
+            { title: 'Best programming languages 2024', heat: '650K searches', tag: '' },
+            { title: 'Mental health awareness', heat: '580K searches', tag: '' },
+            { title: 'Sustainable living tips', heat: '520K searches', tag: '' }
         ],
-        baidu: [
-            { title: '今日头条新闻', heat: '搜索热度 9999', tag: '热' },
-            { title: '天气预报查询', heat: '搜索热度 8888', tag: '' },
-            { title: '股票行情分析', heat: '搜索热度 7777', tag: '新' },
-            { title: '美食菜谱大全', heat: '搜索热度 6666', tag: '' },
-            { title: '旅游景点推荐', heat: '搜索热度 5555', tag: '' },
-            { title: '电影院上映电影', heat: '搜索热度 4444', tag: '' },
-            { title: '招聘求职信息', heat: '搜索热度 3333', tag: '' },
-            { title: '房价走势分析', heat: '搜索热度 2222', tag: '' },
-            { title: '汽车报价查询', heat: '搜索热度 1111', tag: '' },
-            { title: '教育培训课程', heat: '搜索热度 999', tag: '' }
+        twitter: [
+            { title: '#TechNews', heat: '1.2M posts', tag: 'Hot' },
+            { title: '#AI', heat: '980K posts', tag: 'Trending' },
+            { title: '#OpenSource', heat: '720K posts', tag: '' },
+            { title: '#Coding', heat: '650K posts', tag: '' },
+            { title: '#StartupLife', heat: '580K posts', tag: '' },
+            { title: '#ProductHunt', heat: '520K posts', tag: '' },
+            { title: '#WebDev', heat: '480K posts', tag: '' },
+            { title: '#MachineLearning', heat: '420K posts', tag: '' },
+            { title: '#CloudComputing', heat: '380K posts', tag: '' },
+            { title: '#CyberSecurity', heat: '350K posts', tag: '' }
         ],
-        zhihu: [
-            { title: '如何看待人工智能的发展前景？', heat: '1.2亿热度', tag: '热' },
-            { title: '年轻人应该如何理财？', heat: '8500万热度', tag: '精' },
-            { title: '程序员35岁危机是真的吗？', heat: '7200万热度', tag: '' },
-            { title: '为什么要读书？读书有什么用？', heat: '6800万热度', tag: '' },
-            { title: '如何提高英语口语水平？', heat: '5500万热度', tag: '' },
-            { title: '有哪些让你相见恨晚的学习方法？', heat: '4300万热度', tag: '' },
-            { title: '如何评价某某电影？', heat: '3800万热度', tag: '' },
-            { title: '怎样才能月入过万？', heat: '3200万热度', tag: '' },
-            { title: '有哪些值得推荐的书籍？', heat: '2800万热度', tag: '' },
-            { title: '如何保持健康的生活习惯？', heat: '2200万热度', tag: '' }
+        reddit: [
+            { title: 'New breakthrough in quantum computing', heat: '45.2K upvotes', tag: 'Hot' },
+            { title: 'Open source alternative to popular software', heat: '38.5K upvotes', tag: 'Rising' },
+            { title: 'Developer shares 10-year coding journey', heat: '32.1K upvotes', tag: '' },
+            { title: 'Free online learning resources', heat: '28.7K upvotes', tag: '' },
+            { title: 'Best productivity apps for 2024', heat: '24.3K upvotes', tag: '' },
+            { title: 'How I automated my daily tasks', heat: '21.8K upvotes', tag: '' },
+            { title: 'Career advice for software engineers', heat: '18.5K upvotes', tag: '' },
+            { title: 'Home lab setup guide', heat: '15.2K upvotes', tag: '' },
+            { title: 'Privacy-focused alternatives', heat: '12.8K upvotes', tag: '' },
+            { title: 'Self-hosting guide for beginners', heat: '10.5K upvotes', tag: '' }
         ],
-        douyin: [
-            { title: '#热门舞蹈挑战', heat: '2.5亿次播放', tag: '热' },
-            { title: '#美食制作教程', heat: '1.8亿次播放', tag: '爆' },
-            { title: '#搞笑视频合集', heat: '1.5亿次播放', tag: '' },
-            { title: '#宠物日常', heat: '1.2亿次播放', tag: '' },
-            { title: '#旅行vlog', heat: '9800万次播放', tag: '' },
-            { title: '#健身打卡', heat: '8500万次播放', tag: '' },
-            { title: '#穿搭分享', heat: '7200万次播放', tag: '' },
-            { title: '#生活小技巧', heat: '6500万次播放', tag: '' },
-            { title: '#音乐翻唱', heat: '5800万次播放', tag: '' },
-            { title: '#手工DIY', heat: '4500万次播放', tag: '' }
+        hackernews: [
+            { title: 'Show HN: I built an open-source AI tool', heat: '850 points', tag: 'Top' },
+            { title: 'The future of web development', heat: '720 points', tag: 'Hot' },
+            { title: 'Why Rust is gaining popularity', heat: '650 points', tag: '' },
+            { title: 'Database performance optimization tips', heat: '580 points', tag: '' },
+            { title: 'Launch HN: New developer tool', heat: '520 points', tag: '' },
+            { title: 'System design interview guide', heat: '480 points', tag: '' },
+            { title: 'Ask HN: Best tech stack for startups?', heat: '420 points', tag: '' },
+            { title: 'How big tech companies scale', heat: '380 points', tag: '' },
+            { title: 'Open source project of the week', heat: '350 points', tag: '' },
+            { title: 'Deep dive into Linux kernel', heat: '320 points', tag: '' }
         ]
     },
 
@@ -116,7 +116,7 @@ const HotSearchModule = {
         listContainer.innerHTML = `
             <div class="loading">
                 <div class="loading-spinner"></div>
-                <span>加载中...</span>
+                <span>Loading...</span>
             </div>
         `;
 
@@ -137,7 +137,7 @@ const HotSearchModule = {
     fetchHotSearchData(source) {
         // 实际项目中应该调用真实API
         // 这里使用模拟数据并添加一些随机性
-        const baseData = this.mockData[source] || this.mockData.weibo;
+        const baseData = this.mockData[source] || this.mockData.google;
 
         // 随机打乱顺序，模拟数据更新
         return this.shuffleArray([...baseData]).map((item, index) => ({
@@ -157,7 +157,7 @@ const HotSearchModule = {
         if (data.length === 0) {
             listContainer.innerHTML = `
                 <div class="loading">
-                    <span>暂无热搜数据</span>
+                    <span>No trending data available</span>
                 </div>
             `;
             return;
