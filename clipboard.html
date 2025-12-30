@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="威软云剪 - 多端同步的智能剪切板工具，支持自动备份和高频词统计">
+    <meta name="keywords" content="剪切板,云同步,多端同步,剪切板管理,威软云剪">
+    <title>威软云剪 - 智能云剪切板</title>
+    <link rel="stylesheet" href="css/clipboard.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">📋</span>
+                    <h1>威软云剪</h1>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <span class="toggle-icon">◀</span>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="clipboard">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">剪切板</span>
+                </a>
+                <a href="#" class="nav-item" data-view="favorites">
+                    <span class="nav-icon">⭐</span>
+                    <span class="nav-text">收藏夹</span>
+                </a>
+                <a href="#" class="nav-item" data-view="analytics">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">高频词</span>
+                </a>
+                <a href="#" class="nav-item" data-view="backup">
+                    <span class="nav-icon">☁️</span>
+                    <span class="nav-text">云备份</span>
+                </a>
+                <a href="#" class="nav-item" data-view="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">设置</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-section" id="userSection">
+                    <!-- 未登录状态 -->
+                    <div class="login-prompt" id="loginPrompt">
+                        <p class="login-text">登录以同步数据</p>
+                        <button class="btn-login" id="showLoginBtn">立即登录</button>
+                    </div>
+                    <!-- 已登录状态 -->
+                    <div class="user-info" id="userInfo" style="display: none;">
+                        <img class="user-avatar" id="userAvatar" src="" alt="用户头像">
+                        <div class="user-details">
+                            <div class="user-name" id="userName"></div>
+                            <div class="user-email" id="userEmail"></div>
+                        </div>
+                        <button class="btn-logout" id="logoutBtn">退出</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-container">
+            <!-- 顶部工具栏 -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <button class="btn-icon" id="menuToggle" title="菜单">
+                        <span>☰</span>
+                    </button>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="搜索剪切板内容..." autocomplete="off">
+                    </div>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn-icon" id="syncBtn" title="同步">
+                        <span>🔄</span>
+                    </button>
+                    <button class="btn-icon theme-toggle" id="themeToggle" title="切换主题">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button class="btn-primary" id="addClipBtn">
+                        <span>➕</span>
+                        <span>新建</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 剪切板视图 -->
+            <div class="view-container active" id="clipboardView">
+                <div class="view-header">
+                    <h2>剪切板历史</h2>
+                    <div class="view-actions">
+                        <select class="filter-select" id="filterType">
+                            <option value="all">全部类型</option>
+                            <option value="text">纯文本</option>
+                            <option value="url">链接</option>
+                            <option value="code">代码</option>
+                            <option value="image">图片</option>
+                        </select>
+                        <select class="sort-select" id="sortType">
+                            <option value="time">按时间</option>
+                            <option value="frequency">按使用频率</option>
+                            <option value="length">按长度</option>
+                        </select>
+                        <button class="btn-text" id="clearAllBtn">清空全部</button>
+                    </div>
+                </div>
+                <div class="clipboard-grid" id="clipboardGrid">
+                    <!-- 剪切板项将动态添加 -->
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <h3>暂无剪切板记录</h3>
+                        <p>复制内容后会自动出现在这里</p>
+                        <p class="empty-tip">💡 提示：安装浏览器扩展可自动捕获剪切板</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 收藏夹视图 -->
+            <div class="view-container" id="favoritesView">
+                <div class="view-header">
+                    <h2>收藏夹</h2>
+                </div>
+                <div class="favorites-grid" id="favoritesGrid">
+                    <div class="empty-state">
+                        <div class="empty-icon">⭐</div>
+                        <h3>暂无收藏内容</h3>
+                        <p>点击剪切板项的星标图标即可收藏</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 高频词视图 -->
+            <div class="view-container" id="analyticsView">
+                <div class="view-header">
+                    <h2>高频词统计</h2>
+                    <div class="view-actions">
+                        <select class="filter-select" id="analyticsRange">
+                            <option value="today">今天</option>
+                            <option value="week">本周</option>
+                            <option value="month">本月</option>
+                            <option value="all">全部</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="analytics-container">
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-content">
+                                <div class="stat-label">总复制次数</div>
+                                <div class="stat-value" id="totalCopies">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-label">独立内容</div>
+                                <div class="stat-value" id="uniqueItems">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-content">
+                                <div class="stat-label">最常用词</div>
+                                <div class="stat-value" id="topWord">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="word-cloud" id="wordCloud">
+                        <!-- 词云将动态生成 -->
+                    </div>
+                    <div class="frequency-list" id="frequencyList">
+                        <!-- 高频词列表 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 云备份视图 -->
+            <div class="view-container" id="backupView">
+                <div class="view-header">
+                    <h2>云备份</h2>
+                </div>
+                <div class="backup-container">
+                    <div class="backup-services">
+                        <div class="service-card" data-service="googledrive">
+                            <div class="service-icon">📁</div>
+                            <div class="service-info">
+                                <h3>Google Drive</h3>
+                                <p class="service-status" id="gdrive-status">未连接</p>
+                            </div>
+                            <button class="btn-connect" id="gdrive-connect">连接</button>
+                        </div>
+                        <div class="service-card" data-service="onedrive">
+                            <div class="service-icon">☁️</div>
+                            <div class="service-info">
+                                <h3>OneDrive</h3>
+                                <p class="service-status" id="onedrive-status">未连接</p>
+                            </div>
+                            <button class="btn-connect" id="onedrive-connect">连接</button>
+                        </div>
+                        <div class="service-card" data-service="dropbox">
+                            <div class="service-icon">📦</div>
+                            <div class="service-info">
+                                <h3>Dropbox</h3>
+                                <p class="service-status" id="dropbox-status">未连接</p>
+                            </div>
+                            <button class="btn-connect" id="dropbox-connect">连接</button>
+                        </div>
+                    </div>
+                    <div class="backup-settings">
+                        <h3>备份设置</h3>
+                        <div class="setting-item">
+                            <label class="setting-label">
+                                <input type="checkbox" id="autoBackup">
+                                <span>自动备份</span>
+                            </label>
+                            <p class="setting-desc">每天自动备份剪切板数据到云端</p>
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">备份频率</label>
+                            <select class="setting-select" id="backupFrequency">
+                                <option value="daily">每天</option>
+                                <option value="weekly">每周</option>
+                                <option value="monthly">每月</option>
+                            </select>
+                        </div>
+                        <div class="backup-actions">
+                            <button class="btn-secondary" id="backupNowBtn">立即备份</button>
+                            <button class="btn-secondary" id="restoreBtn">从备份恢复</button>
+                        </div>
+                    </div>
+                    <div class="backup-history">
+                        <h3>备份历史</h3>
+                        <div class="history-list" id="backupHistory">
+                            <div class="empty-state">
+                                <p>暂无备份记录</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置视图 -->
+            <div class="view-container" id="settingsView">
+                <div class="view-header">
+                    <h2>设置</h2>
+                </div>
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>常规设置</h3>
+                        <div class="setting-item">
+                            <label class="setting-label">
+                                <input type="checkbox" id="autoSync" checked>
+                                <span>自动同步</span>
+                            </label>
+                            <p class="setting-desc">自动同步剪切板内容到云端</p>
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">保存历史数量</label>
+                            <select class="setting-select" id="historyLimit">
+                                <option value="100">100 条</option>
+                                <option value="500" selected>500 条</option>
+                                <option value="1000">1000 条</option>
+                                <option value="-1">无限制</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">
+                                <input type="checkbox" id="soundEnabled">
+                                <span>声音提示</span>
+                            </label>
+                            <p class="setting-desc">复制内容时播放提示音</p>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>隐私设置</h3>
+                        <div class="setting-item">
+                            <label class="setting-label">
+                                <input type="checkbox" id="excludePasswords" checked>
+                                <span>排除密码</span>
+                            </label>
+                            <p class="setting-desc">不保存可能包含密码的内容</p>
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">
+                                <input type="checkbox" id="encryptSensitive">
+                                <span>加密敏感内容</span>
+                            </label>
+                            <p class="setting-desc">对敏感内容进行端到端加密</p>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>扩展程序</h3>
+                        <div class="extension-card">
+                            <div class="extension-info">
+                                <h4>浏览器扩展</h4>
+                                <p>安装扩展程序以自动捕获系统剪切板</p>
+                            </div>
+                            <div class="extension-actions">
+                                <button class="btn-secondary" id="installChromeExt">Chrome 扩展</button>
+                                <button class="btn-secondary" id="installFirefoxExt">Firefox 扩展</button>
+                            </div>
+                        </div>
+                        <div class="extension-card">
+                            <div class="extension-info">
+                                <h4>桌面客户端</h4>
+                                <p>下载客户端实现更强大的剪切板监听</p>
+                            </div>
+                            <div class="extension-actions">
+                                <button class="btn-secondary" id="downloadWindows">Windows</button>
+                                <button class="btn-secondary" id="downloadMac">macOS</button>
+                                <button class="btn-secondary" id="downloadLinux">Linux</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>数据管理</h3>
+                        <div class="data-actions">
+                            <button class="btn-secondary" id="exportDataBtn">导出数据</button>
+                            <button class="btn-secondary" id="importDataBtn">导入数据</button>
+                            <button class="btn-danger" id="clearDataBtn">清空所有数据</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>登录账户</h3>
+                <button class="modal-close" id="closeLoginModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="login-options">
+                    <button class="oauth-btn google-btn" id="googleLogin">
+                        <span class="oauth-icon">🔍</span>
+                        <span>使用 Google 登录</span>
+                    </button>
+                    <button class="oauth-btn microsoft-btn" id="microsoftLogin">
+                        <span class="oauth-icon">Ⓜ️</span>
+                        <span>使用 Microsoft 登录</span>
+                    </button>
+                    <button class="oauth-btn github-btn" id="githubLogin">
+                        <span class="oauth-icon">🐙</span>
+                        <span>使用 GitHub 登录</span>
+                    </button>
+                    <button class="oauth-btn twitter-btn" id="twitterLogin">
+                        <span class="oauth-icon">🐦</span>
+                        <span>使用 X (Twitter) 登录</span>
+                    </button>
+                </div>
+                <p class="login-footer">登录即表示您同意我们的服务条款和隐私政策</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新建剪切板项模态框 -->
+    <div class="modal" id="addClipModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新建剪切板</h3>
+                <button class="modal-close" id="closeAddModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>内容类型</label>
+                    <select class="form-control" id="newClipType">
+                        <option value="text">文本</option>
+                        <option value="url">链接</option>
+                        <option value="code">代码</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>内容</label>
+                    <textarea class="form-control" id="newClipContent" rows="6" placeholder="输入内容..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>标签（可选）</label>
+                    <input type="text" class="form-control" id="newClipTags" placeholder="用空格分隔多个标签">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="cancelAddClip">取消</button>
+                    <button class="btn-primary" id="saveNewClip">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情模态框 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>剪切板详情</h3>
+                <button class="modal-close" id="closeDetailModal">✕</button>
+            </div>
+            <div class="modal-body" id="detailContent">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示通知 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/clipboard/storage.js"></script>
+    <script src="js/clipboard/sync.js"></script>
+    <script src="js/clipboard/auth.js"></script>
+    <script src="js/clipboard/analytics.js"></script>
+    <script src="js/clipboard/backup.js"></script>
+    <script src="js/clipboard/app.js"></script>
+</body>
+</html>

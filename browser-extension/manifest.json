@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "威软云剪 - 智能云剪切板",
+  "version": "1.0.0",
+  "description": "自动捕获剪切板内容，多端同步，高频词统计",
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-clipboard": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+V",
+        "mac": "Command+Shift+V"
+      },
+      "description": "打开剪切板面板"
+    }
+  }
+}

@@ -1,6 +1,25 @@
-# 威软快搜 - 超级搜索工具
+# 威软工具套件
+
+> 包含超级搜索工具和智能云剪切板两大核心产品
+
+## 📦 产品列表
+
+### 1. 威软快搜 - 超级搜索工具 🔍
 
 一站式超级搜索工具，支持网页、网盘、论坛等多源搜索，具备热搜榜单、搜索历史、实用工具等功能。
+
+**访问入口**: [index.html](index.html)
+
+### 2. 威软云剪 - 智能云剪切板 📋
+
+功能完善的网络剪切板应用，支持多端同步、高频词统计、自动备份等功能。
+
+**访问入口**: [clipboard.html](clipboard.html)
+**详细文档**: [CLIPBOARD_README.md](CLIPBOARD_README.md)
+
+---
+
+## 威软快搜 - 功能介绍
 
 ## 功能特点
 
@@ -50,19 +69,33 @@
 
 ```
 weiruan-super-search/
-├── index.html          # 主页面
+├── index.html                  # 快搜主页面
+├── clipboard.html              # 云剪主页面
 ├── css/
-│   └── style.css       # 样式文件
+│   ├── style.css              # 快搜样式
+│   └── clipboard.css          # 云剪样式
 ├── js/
-│   ├── config.js       # 配置文件
-│   ├── search.js       # 搜索模块
-│   ├── hotSearch.js    # 热搜模块
-│   ├── tools.js        # 工具模块
-│   └── app.js          # 主应用
-├── assets/             # 资源文件
-├── data/               # 数据文件
+│   ├── config.js              # 快搜配置
+│   ├── search.js              # 搜索模块
+│   ├── hotSearch.js           # 热搜模块
+│   ├── tools.js               # 工具模块
+│   ├── app.js                 # 快搜主应用
+│   └── clipboard/             # 云剪模块
+│       ├── storage.js         # 存储管理
+│       ├── sync.js            # 多端同步
+│       ├── auth.js            # 用户认证
+│       ├── analytics.js       # 数据分析
+│       ├── backup.js          # 云端备份
+│       └── app.js             # 云剪主应用
+├── browser-extension/         # 浏览器扩展
+│   ├── manifest.json
+│   ├── background.js
+│   ├── popup.html
+│   ├── popup.js
+│   └── content.js
 ├── LICENSE
-└── README.md
+├── README.md                  # 项目总览
+└── CLIPBOARD_README.md        # 云剪详细文档
 ```
 
 ## 快速开始
@@ -102,12 +135,22 @@ npx serve
 
 ## 开发计划
 
+### 威软快搜
 - [ ] 接入真实搜索API
 - [ ] 添加更多搜索引擎
 - [ ] 实时热搜数据
 - [ ] 用户账号系统
 - [ ] 搜索结果聚合展示
 - [ ] PWA支持
+
+### 威软云剪
+- [x] 基础剪切板功能
+- [x] 本地存储和搜索
+- [x] 高频词统计
+- [x] 浏览器扩展
+- [ ] 真实OAuth集成
+- [ ] 云端同步功能
+- [ ] 移动端应用
 
 ## 许可证
 
